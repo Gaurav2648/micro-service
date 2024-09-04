@@ -1,11 +1,15 @@
 # Stage 1: Build the application
-FROM maven:3.8.6-jdk-11 AS builder
-WORKDIR /app
-COPY . .
-RUN mvn clean package -DskipTests
+# Use an official Java 8 runtime as a parent image
+FROM openjdk:8-jre-alpine
 
-# Stage 2: Package the application
-FROM openjdk:11-jre-slim
+# Set the working directory inside the container
 WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# Copy the Spring Boot JAR file (replace 'your-app.jar' with your actual JAR file)
+COPY target/springboot-backend-1.0.jar /app/app.jar
+
+# Expose the port that your Spring Boot application listens on (e.g., 8080)
+EXPOSE 80
+
+# Define the command to run your Spring Boot application
+CMD ["java", "-jar", "app.jar"]
