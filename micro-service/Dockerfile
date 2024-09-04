@@ -9,7 +9,7 @@ WORKDIR /app
 COPY target/springboot-backend-1.0.jar /app/app.jar
 
 # Expose the port that your Spring Boot application listens on (e.g., 8080)
-EXPOSE 80
+EXPOSE 8080
 
 # Define the command to run your Spring Boot application
 CMD ["java", "-jar", "app.jar"]
